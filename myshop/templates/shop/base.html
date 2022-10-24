@@ -22,7 +22,7 @@
         </li>
         {% if user.is_authenticated%}
           <li class="nav-item">
-            <p aria-current="page">{{user.username}}</p>
+            <a class="nav-link active" aria-current="page" href="/">{{user.first_name}}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'shop:logout' %}">Выйти</a>
@@ -44,8 +44,9 @@
           <a class="nav-link" href="http://127.0.0.1:8000/admin/">Админ панель</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+      <form class="d-flex" role="search" method="POST" action="{% url 'shop:search' %}">
+        {% csrf_token%}
+        <input class="form-control me-2" name="searched" type="search" placeholder="Поиск" aria-label="Поиск">
         <button class="btn btn-outline-success" type="submit">Поиск</button>
       </form>
 

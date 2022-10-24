@@ -13,6 +13,7 @@ CHOICES = (
 )
 
 class User(AbstractUser):
+    username = None
     USERNAME_FIELD = 'email'
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)

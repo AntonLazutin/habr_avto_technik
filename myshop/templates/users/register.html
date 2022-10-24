@@ -92,17 +92,18 @@
             </div>
             <div class="form-group has-float-label">
                 {{form.country|add_class:"form-control custom-select"}}
-                {% comment %} <select class="form-control custom-select" id="country">
-                        <option selected='selected' disabled>Страна</option>
-                    {% for country in form.country%}
-                        <option name={{form.get_country_display}}>{{country}}</option>
-                    {% endfor %}
-                </select> {% endcomment %}
                 <label for="country">{{form.country.label}}</label>
             </div>
             <div class="text-xs-center">
             <button class="btn btn-block btn-primary" type="submit">Регистрация</button>
             </div>
+            {% for field in form %}
+                <ul style="color: red;">
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+                </ul>
+            {% endfor%}
         </form>
     </div>
 {% endblock content%}

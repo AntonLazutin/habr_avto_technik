@@ -5,12 +5,17 @@ from django.contrib.auth import login, logout, authenticate
 from .models import Category, Product, User
 from cart.forms import CartAddProductForm
 from .forms import *
-from django.views.generic import View, FormView
+from django.views.generic import View
+
+from django.db.models import Q
 
 
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
+    if 'q' in request.GET:
+        q = request.GET['q']
+        products = Product.objects.filter(name__icontains=q) 
     products = Product.objects.filter(available=True)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -53,7 +58,7 @@ class LoginView(View):
                 HttpResponse('Invalid account')
         return render(request, self.template_name, {'form': form})
     
-    
+
 def signup_view(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -70,3 +75,14 @@ class LogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         return HttpResponseRedirect(reverse('shop:product_list'))
+
+
+def search_view(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched')
+        products = Product.objects.filter(Q(name__contains=searched))
+        print(searched)
+        print(products)
+        return render(request, 'shop/search.html', {'searched': searched, 'products': products})
+    else:
+        return render(request, 'shop/search.html')
