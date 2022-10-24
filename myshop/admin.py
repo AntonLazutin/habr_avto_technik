@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, Product
+from .models import Category, Product, User
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -21,3 +21,5 @@ class ProductAdmin(admin.ModelAdmin):
         return "None"
 
     image_show.__name__ = "Картинка"
+
+admin.site.register(User)

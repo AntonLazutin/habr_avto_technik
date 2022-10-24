@@ -1,5 +1,24 @@
+from enum import unique
+from statistics import mode
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
+
+
+CHOICES = (
+    ("RU", "Россия"),
+    ("RB", "Беларусь"),
+    ("KZ", "Казахстан"),
+    ("UZ", "Узбекистан"),
+)
+
+class User(AbstractUser):
+    USERNAME_FIELD = 'email'
+    first_name = models.CharField(max_length=50, null=False, blank=False)
+    last_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.CharField(max_length=320, null=False, blank=False, unique=True)
+    country = models.CharField(max_length=10, choices=CHOICES)
+    REQUIRED_FIELDS: list[str] = []
 
 
 class Category(models.Model):

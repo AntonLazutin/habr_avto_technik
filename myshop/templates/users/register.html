@@ -1,0 +1,108 @@
+{%extends 'shop/base.html'%}
+{% load widget_tweaks %}
+
+
+{% block content%}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <style>
+    .form-width {max-width: 25rem;}
+    .has-float-label {
+    position: relative; }
+    .has-float-label label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: text;
+    font-size: 75%;
+    opacity: 1;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+    top: -.5em;
+    left: 0.75rem;
+    z-index: 3;
+    line-height: 1;
+    padding: 0 1px; }
+    .has-float-label label::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    background: white;
+    height: 2px;
+    top: 50%;
+    left: -.2em;
+    right: -.2em;
+    z-index: -1; }
+    .has-float-label .form-control::-webkit-input-placeholder {
+    opacity: 1;
+    -webkit-transition: all .2s;
+    transition: all .2s; }
+    .has-float-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
+    opacity: 0; }
+    .has-float-label .form-control:placeholder-shown:not(:focus) + label {
+    font-size: 150%;
+    opacity: .5;
+    top: .3em; }
+
+    .input-group .has-float-label {
+    display: table-cell; }
+    .input-group .has-float-label .form-control {
+    border-radius: 0.25rem; }
+    .input-group .has-float-label:not(:last-child) .form-control {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0; }
+    .input-group .has-float-label:not(:first-child) .form-control {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: -1px; }
+    </style>
+    <div class="p-x-1 p-y-3">
+        <form class="card card-block m-x-auto bg-faded form-width" method="POST" action="{% url 'shop:signup' %}">
+            {% csrf_token %}
+            <legend class="m-b-1 text-xs-center">Регистрация</legend>
+            <div class="form-group input-group">
+                <span class="has-float-label">
+                    {{form.first_name|add_class:"form-control"}}
+                    {% comment %} <input class="form-control" id="first_name" type="text" placeholder="Имя"/> {% endcomment %}
+                    <label for="first">{{form.first_name.label}}</label>
+                </span>
+                <span class="has-float-label">
+                    {% comment %} <input class="form-control" id="last_name" type="text" placeholder="Фамилия"/> {% endcomment %}
+                    {{form.last_name|add_class:"form-control"}}
+                    <label for="last">{{form.last_name.label}}</label>
+                </span>
+            </div>
+            <div class="form-group input-group">
+                <span class="input-group-addon">@</span>
+                <span class="has-float-label">
+                    {{form.email|add_class:"form-control"}}
+                    {% comment %} <input class="form-control" id="email" type="email" placeholder="name@example.com"/> {% endcomment %}
+                    <label for="email">{{form.email.label}}</label>
+                </span>
+            </div>
+            <div class="form-group has-float-label">
+                {{form.password1|add_class:"form-control"}}
+                {% comment %} <input class="form-control" id="password1" type="password" placeholder="••••••••"/> {% endcomment %}
+                <label for="password">{{form.password1.label}}</label>
+            </div>
+            <div class="form-group has-float-label">
+                {{form.password2|add_class:"form-control"}}
+                {% comment %} <input class="form-control" id="password2" type="password" placeholder="••••••••"/> {% endcomment %}
+                <label for="password">{{form.password1.label}}</label>
+            </div>
+            <div class="form-group has-float-label">
+                {{form.country|add_class:"form-control custom-select"}}
+                {% comment %} <select class="form-control custom-select" id="country">
+                        <option selected='selected' disabled>Страна</option>
+                    {% for country in form.country%}
+                        <option name={{form.get_country_display}}>{{country}}</option>
+                    {% endfor %}
+                </select> {% endcomment %}
+                <label for="country">{{form.country.label}}</label>
+            </div>
+            <div class="text-xs-center">
+            <button class="btn btn-block btn-primary" type="submit">Регистрация</button>
+            </div>
+        </form>
+    </div>
+{% endblock content%}

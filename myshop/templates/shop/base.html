@@ -20,6 +20,21 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Главная</a>
         </li>
+        {% if user.is_authenticated%}
+          <li class="nav-item">
+            <p aria-current="page">{{user.username}}</p>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'shop:logout' %}">Выйти</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'shop:signup' %}">Регистрация</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'shop:login' %}">Войти</a>
+          </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="/">О нас</a>
         <li class="nav-item">
@@ -55,7 +70,9 @@
 
 </div>
 <div id="content">
-{% block content %}{% endblock %}
+{% block content %}
+{{user.username}}
+{% endblock %}
 </div>
 </body>
 </html>
