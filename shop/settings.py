@@ -42,7 +42,7 @@ SECRET_KEY = os.environ.get('SECRET_key')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'https://blooming-forest-08401.herokuapp.com/']
+ALLOWED_HOSTS = ['https://blooming-forest-08401.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
@@ -68,7 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'shop.urls'
