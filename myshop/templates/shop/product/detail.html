@@ -11,7 +11,7 @@
 <h1>{{ product.name }}</h1>
 
 <h2>
-    <a class="btn btn-primary" href="{% url 'shop:product_list'%}" role="button"></a>
+    <a class="btn btn-primary" href="{% url 'shop:product_list'%}" role="button"><</a>
 <a href="{{ product.category.get_absolute_url }}">{{product.category }}</a>
 </h2>
 <p class="price">₽{{ product.price }}</p>
