@@ -39,7 +39,7 @@ SECRET_KEY = os.environ.get('SECRET_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'https://blooming-forest-08401.herokuapp.com/']
 
